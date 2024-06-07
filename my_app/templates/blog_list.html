@@ -8,10 +8,10 @@
     {% for blog in blogs%}
     <li>
         <h3 class="text-bold text-2xl">{{blog.title}}</h3> 
+        <img src="{{blog.image.url}}" alt="Blog Image" class="image" width="300"></a>
         <p>{{blog.content}}</p>
-        <p><b>{{blog.author}}</b></p>
-        <p>{{blog.created_date}}</p>
-        <p>{{blog.published}}</p>
+        <p><b>{{blog.author}} on {{blog.date_posted}}</b></p>
+        <p >{{ blog.date_posted }}</p>
     </li>
       {% endfor %}
 </ul>

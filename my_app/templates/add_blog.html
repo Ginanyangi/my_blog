@@ -1,13 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Blog {% endblock %}
+{% block title %}Add Blog - Your Django App{% endblock %}
 
 {% block content %}
-<form method="post" class="max-w-lg mx-auto mt-8">
+<form method="post" class="max-w-lg mx-auto mt-8" enctype="multipart/form-data">
     {% csrf_token %}
+    
     <div class="mb-4">
         <label for="{{ form.author.id_for_label }}" class="block text-gray-700 font-bold mb-2">Author:</label>
         {{ form.author }}
+    </div>
+    <div class="mb-4">
+        <label for="{{ form.image.id_for_label }}" class="block text-gray-700 font-bold mb-2">Image:</label>
+        {{ form.image }}
     </div>
     <div class="mb-4">
         <label for="{{ form.title.id_for_label }}" class="block text-gray-700 font-bold mb-2">Title:</label>

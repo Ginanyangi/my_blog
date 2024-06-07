@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Blog,Subscriber
+from .models import Blog
+from .models import Subscriber
 from django.contrib import messages
 from .forms import BlogForm
 
@@ -43,11 +44,11 @@ def subscribe(request):
 
 def add_blog(request):
     if request.method == 'POST':
-        form = BlogForm(request.POST)
+        form = BlogForm(request.POST,request.FILES)
         if form.is_valid():
-            blog = form.save()
-            return redirect('blog_list')
-        else:
-            form = BlogForm()
-    return render(request,'add_blog.html',{'form':form})
+            blog = form.save(commit=False)
+            return redirect('blog')
+    else:
+        form = BlogForm()
+    return render(request, 'add_blog.html', {'form': form})
         
