@@ -1,5 +1,8 @@
 from django.db import models
 from django.urls import reverse
+from django.utils import timezone
+
+
 
 # Create your models here.
 class Author(models.Model):
@@ -24,12 +27,16 @@ class Subscriber(models.Model):
     
 
 class Blog(models.Model):
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
-    author = models.ForeignKey(Author,on_delete=models.CASCADE)
-    content = models.TextField(max_length=5000)
-    created_date = models.DateTimeField(auto_now=True)
-    published = models.DateTimeField(auto_now=False)
+    content = models.TextField()
+    date_posted = models.DateTimeField(default=timezone.now)
+    last_updated = models.DateTimeField(auto_now=True)
+    is_published = models.BooleanField(default=False)
 
     def __str__(self) :
         return self.title
+    
+
+
     
