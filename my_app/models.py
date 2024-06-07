@@ -14,6 +14,15 @@ class Author(models.Model):
         return f'{self.first_name} {self.last_name}'
     
 
+class Subscriber(models.Model):
+    email = models.EmailField(unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.email
+    
+
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(Author,on_delete=models.CASCADE)

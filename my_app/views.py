@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from .models import Blog
+from django.shortcuts import render, redirect
+from .models import Blog,Subscriber
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -23,3 +24,16 @@ def blog_list(request):
     blogs = Blog.objects.all()
     context = {'blogs' : blogs}
     return render(request,'blog_list.html', context)
+
+def subscribe(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        if Subscriber.objects.filter(email=email).exists():
+            messages.error(request,'You are alread subscribed.')
+        else:
+            subscriber = Subscriber(email=email)
+            subscriber.save()
+            messages.success(request,'Thank you for subscribing!')
+            return redirect('subscribe')
+        return render(request,'subscribe.html')
+        
